@@ -1,0 +1,17 @@
+{
+  "name": "minipack-ts",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "author": "Tatsuya Itakura",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "typescript": "^3.6.3"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "ts-node": "^8.3.0"
+  }
+}
