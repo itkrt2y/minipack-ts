@@ -5,7 +5,7 @@
   "author": "Tatsuya Itakura",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts examples/index.ts"
   },
   "dependencies": {
     "typescript": "^3.6.3"
