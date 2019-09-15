@@ -12,7 +12,11 @@ export function bundle(graph: Graph) {
 
   return `
   (function (modules) {
+    const moduleCache = {};
+
     function require(id) {
+      if (moduleCache[id]) return moduleCache[id];
+
       const [fn, mapping] = modules[id];
 
       function localRequire(relativePath) {
@@ -20,9 +24,8 @@ export function bundle(graph: Graph) {
       }
 
       const localModule = { exports: {} };
-
+      moduleCache[id] = localModule.exports
       fn(localRequire, localModule, localModule.exports);
-
       return localModule.exports;
     }
 
