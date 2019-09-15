@@ -10,14 +10,19 @@ export function createGraph(entryFilename: string): Graph {
   for (const asset of queue) {
     const dirname = path.dirname(asset.filename);
 
-    asset.dependencies.forEach(relativePath => {
-      const absolutePath = path.join(dirname, relativePath);
-      const child = createAsset(absolutePath);
+    asset.dependencies.forEach(relativePathOrNodeModule => {
+      const child = createAsset(resolvePath(relativePathOrNodeModule, dirname));
 
-      asset.mapping[relativePath] = child.id;
+      asset.mapping[relativePathOrNodeModule] = child.id;
       queue.push(child);
     });
   }
 
   return queue;
+}
+
+function resolvePath(filename: string, dirname: string): string {
+  return filename.startsWith("./")
+    ? path.resolve(dirname, filename)
+    : require.resolve(filename);
 }
